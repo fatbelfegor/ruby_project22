@@ -16,6 +16,7 @@ get '/contacts' do
 end
 
 get '/about' do
+	@error = 'Something wrong!'
 	erb :about
 end
 
@@ -26,6 +27,16 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@barber = params[:barber]
 	@color = params[:color]
+
+hh = { :username => 'Введите имя', :phone => 'Укажите телефон', :datetime => 'Ввведите дату и время' }
+
+# For an each pair check value
+hh.each do |k,v|
+	if params[k] == ''
+		@error = hh[k]
+		return erb :visit
+	end
+end
 
 	@title = 'Thank You'
 	@message = "Дорогой #{@username} с нетерпением ждем  вас #{@datetime}, для окраски в: #{@color}"

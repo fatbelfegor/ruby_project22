@@ -1,5 +1,11 @@
 <h2>Запишись на постриг</h2>
 
+<script type="text/javascript">
+	$(function(){
+		$('#color').simplecolorpicker();
+	});
+</script>
+
 <form action="/visit" method="POST" role="form">
   <div class="form-group">
     <label>Ваше имя</label>
@@ -46,6 +52,3 @@
   <button type="submit" class="btn btn-primary">Записаться</button>
 </form>
 
-<script type="text/javascript">
-	$('#color').simplecolorpicker();
-</script>
