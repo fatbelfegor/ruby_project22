@@ -9,11 +9,11 @@
 <form action="/visit" method="POST" role="form">
   <div class="form-group">
     <label>Ваше имя</label>
-    <input id="bbb" name="username" type="text" class="form-control" placeholder="Введите ваше имя">
+    <input id="bbb" name="username" type="text" class="form-control" placeholder="Введите ваше имя" value="<%=@username%>">
   </div>
   <div class="form-group">
     <label>Ваш телефон</label>
-    <input name="phone" type="text" class="form-control" placeholder="+Х-ХХХ-ХХХХХХХ">
+    <input name="phone" type="text" class="form-control" placeholder="+Х-ХХХ-ХХХХХХХ" value="<%=@phone%>">
   </div>
 	
 	<div class="form-group">
@@ -27,7 +27,7 @@
 
   <div class="form-group">
     <label>Когда вас ждать</label>
-    <input name="datetime" type="text" class="form-control" placeholder="Введите время визита">
+    <input name="datetime" type="text" class="form-control" placeholder="Введите время визита" value="<%=@datetime%>">
   </div>
 
 <div class="form-group">
