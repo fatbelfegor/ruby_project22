@@ -3,6 +3,21 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require "mail"
+require 'sqlite3'
+
+configure do
+	@db = SQLite3::Database.new 'barbershop.sqlite'
+	@db.execute 'CREATE TABLE IF NOT EXISTS
+		"Users" 
+		(
+			"id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null),
+			"username" VARCHAR DEFAULT (null), 
+			"phone" TEXT,
+		 	"datestamp" TEXT, "barber" TEXT, 
+		 	"color" TEXT
+		)'
+end
+
 
 get '/' do
 	erb 'Welcome to our shop'
