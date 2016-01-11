@@ -6,8 +6,8 @@ require "mail"
 require 'sqlite3'
 
 configure do
-	@db = SQLite3::Database.new 'barbershop.sqlite'
-	@db.execute 'CREATE TABLE IF NOT EXISTS
+	@@db = SQLite3::Database.new 'barbershop.sqlite'
+	@@db.execute 'CREATE TABLE IF NOT EXISTS
 		"Users" 
 		(
 			"id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null),
@@ -52,6 +52,11 @@ post '/visit' do
 	if @error != ''
 		return erb :visit
 	end
+
+	@@db.execute 'INSERT INTO
+			Users (username, phone, datestamp, barber, color)
+			VALUES (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+
 
 
 	@title = 'Thank You'
@@ -108,6 +113,3 @@ post '/contacts' do
 	f.close
 	erb :message
 end
-
-
-
