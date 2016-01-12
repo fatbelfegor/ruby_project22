@@ -113,3 +113,14 @@ post '/contacts' do
 	f.close
 	erb :message
 end
+
+get '/showusers' do
+	
+	#@@db.results_as_hash = true
+	#@@db.execute 'SELECT * FROM	Users' do |row|
+	#	puts row               
+	#	username, phone, datestamp, barber, color)
+	#		VALUES (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+	
+	erb :showusers
+end

@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('#color').simplecolorpicker();
-		$('#datetimepicker').datetimepicker();
+		jQuery('#datetimepicker').datetimepicker();
 	});
 </script>
 
@@ -28,7 +28,7 @@
 
   <div class="form-group">
     <label>Когда вас ждать</label>
-    <input id="datetimepicker" name="datetime" type="text" class="form-control" placeholder="Введите время визита" value="<%=@datetime%>">
+    <input type="text" id="datetimepicker" name="datetime" class="form-control" placeholder="Введите время визита" value="<%=@datetime%>">
   </div>
 
 <div class="form-group">
