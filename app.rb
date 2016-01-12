@@ -7,6 +7,7 @@ require 'sqlite3'
 
 configure do
 	@@db = SQLite3::Database.new 'barbershop.sqlite'
+	@@db.results_as_hash = true
 	@@db.execute 'CREATE TABLE IF NOT EXISTS
 		"Users" 
 		(
@@ -116,8 +117,8 @@ end
 
 get '/showusers' do
 	
-	#@@db.results_as_hash = true
-	#@@db.execute 'SELECT * FROM	Users' do |row|
+	@@db.results_as_hash = true
+	@results = @@db.execute 'SELECT * FROM	Users ORDER BY id DESC'
 	#	puts row               
 	#	username, phone, datestamp, barber, color)
 	#		VALUES (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
