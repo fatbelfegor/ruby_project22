@@ -5,6 +5,12 @@ require 'sinatra/reloader'
 require "mail"
 require 'sqlite3'
 
+def get_db
+	db = SQLite3::Database.new 'barbershop.sqlite'
+	db.results_as_hash = true
+	return db
+end
+
 def if_barber_exists? db, name
 	db.execute('SELECT * FROM Barbers WHERE name=?', [name]).length > 0
 end
@@ -17,10 +23,10 @@ def seed_db db, barbers
 	end
 end
 
-def get_db
-	db = SQLite3::Database.new 'barbershop.sqlite'
-	db.results_as_hash = true
-	return db
+before do
+	db = get_db
+	@barbers = db.execute 'SELECT * FROM Barbers'
+
 end
 
 configure do
@@ -45,6 +51,7 @@ configure do
 
 	seed_db db, ['Jessie Pinkman', 'Walter White', 'Gus Fring', 'Mike Ehrmantraut']
 end
+
 
 
 get '/' do
@@ -81,6 +88,7 @@ post '/visit' do
 		return erb :visit
 	end
 
+	db = get_db
 	db.execute 'INSERT INTO
 			Users (username, phone, datestamp, barber, color)
 			VALUES (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
@@ -143,8 +151,7 @@ post '/contacts' do
 end
 
 get '/showusers' do
-	
-	
+	db = get_db	
 	@results = db.execute 'SELECT * FROM	Users ORDER BY id DESC'
 	#	puts row               
 	#	username, phone, datestamp, barber, color)
